@@ -1,8 +1,7 @@
 !.gitignore
 node_modules
 
-scripts/generateSignature.js
-scripts/test.js
+scripts/
 
 .DS_Store
 .env
