@@ -3,7 +3,7 @@ const { keccak256 } = require("ethereum-cryptography/keccak");
 const { toHex, utf8ToBytes } = require("ethereum-cryptography/utils");
 require('dotenv').config();
 
-export async function generateSignedDigitalSignature(PRIVATE__KEY) {
+async function generateSignedDigitalSignature(PRIVATE__KEY) {
     const [PRIVATE_KEY_1, PRIVATE_KEY_2, PRIVATE_KEY_3] =
     	[process.env.PRIVATE___KEY___1, process.env.PRIVATE___KEY___2, process.env.PRIVATE___KEY___3];
 
@@ -23,7 +23,13 @@ export async function generateSignedDigitalSignature(PRIVATE__KEY) {
 	        const [signature, recoveryBit]  = await secp.sign(hashedMessage, VALID_PRIVATE_KEY, {recovered: true} );
 
 	        const PUBLIC_KEY_RECOVERED      = await secp.recoverPublicKey(hashedMessage, signature, recoveryBit);
+	        console.log([VALID_PRIVATE_KEY, PUBLIC_KEY]);
         }
     }
-    return hashedMessage;
+    // return hashedMessage;
 }
+
+
+generateSignedDigitalSignature(process.env.PRIVATE___KEY___1);
+generateSignedDigitalSignature(process.env.PRIVATE___KEY___2);
+generateSignedDigitalSignature(process.env.PRIVATE___KEY___3);
