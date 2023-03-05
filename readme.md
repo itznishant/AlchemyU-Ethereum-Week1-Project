@@ -1,6 +1,7 @@
 ## INFO
 Author: Nishant Vemulakonda
-This GitHub Repository serves as a Week-1 Project Submission for the Ethereum Bootcamp on ALCHEMY UNIVSERITY
+
+This GitHub Repository serves as a Week-1 Project Submission for the Ethereum Bootcamp on ALCHEMY UNIVERSITY
 (https://university.alchemy.com/).
 
 ## ECDSA Node
