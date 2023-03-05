@@ -4,32 +4,19 @@ const { toHex, utf8ToBytes } = require("ethereum-cryptography/utils");
 require('dotenv').config();
 
 async function generateSignedDigitalSignature(PRIVATE__KEY) {
-    const [PRIVATE_KEY_1, PRIVATE_KEY_2, PRIVATE_KEY_3] =
-    	[process.env.PRIVATE___KEY___1, process.env.PRIVATE___KEY___2, process.env.PRIVATE___KEY___3];
-
     if (PRIVATE__KEY) {
-        const VALID_PRIVATE_KEY = PRIVATE__KEY === PRIVATE_KEY_1 
-        ? PRIVATE_KEY_1 : PRIVATE__KEY === PRIVATE_KEY_2 ? PRIVATE_KEY_2 : 
-        	PRIVATE__KEY === PRIVATE_KEY_3 ? PRIVATE_KEY_3: "";
-
-        if(VALID_PRIVATE_KEY) {
-	        const PUBLIC_KEY_FULL   = secp.getPublicKey(VALID_PRIVATE_KEY);
-	        const PUBLIC_KEY        = toHex(keccak256(PUBLIC_KEY_FULL).slice(-20));
-
-	        const message                   = "I APPROVE TRANSFER OF BALANCE FOR THIS TRANSACTION AT: ";
-	        const ts = Date.now();
-
-	        const hashedMessage             = await keccak256(utf8ToBytes(message+ts));
-	        const [signature, recoveryBit]  = await secp.sign(hashedMessage, VALID_PRIVATE_KEY, {recovered: true} );
-
-	        const PUBLIC_KEY_RECOVERED      = await secp.recoverPublicKey(hashedMessage, signature, recoveryBit);
-	        console.log([VALID_PRIVATE_KEY, PUBLIC_KEY]);
-        }
-    }
-    // return hashedMessage;
+	    const message = "I APPROVE TRANSFER OF BALANCE FOR THIS TRANSACTION.";
+	    // const ts = Date.now();
+	    const hashedMessage = await keccak256(utf8ToBytes(message));
+	    	// +ts));
+	    const [signature, recoveryBit] = await secp.sign(hashedMessage, PRIVATE__KEY, {recovered: true} );
+		if (recoveryBit) {
+			console.log("Message Hash:\n", toHex(hashedMessage),"\nSignature: \n", toHex(signature), "\nRecovery Bit: \n",  recoveryBit);			
+		}
+	   // return [toHex(hashedMessage), toHex(signature), recoveryBit];
+	}
 }
 
-
-generateSignedDigitalSignature(process.env.PRIVATE___KEY___1);
-generateSignedDigitalSignature(process.env.PRIVATE___KEY___2);
-generateSignedDigitalSignature(process.env.PRIVATE___KEY___3);
+generateSignedDigitalSignature(process.env.PRIVATE___KEY___1)
+// generateSignedDigitalSignature(process.env.PRIVATE___KEY___2);
+// generateSignedDigitalSignature(process.env.PRIVATE___KEY___3);

@@ -15,9 +15,9 @@ function App() {
         balance={balance}
         setBalance={setBalance}
         address={address}
+        setAddress={setAddress}
         signature={signature}
         setSignature={setSignature}
-        setAddress={setAddress}
       />
       <Transfer setBalance={setBalance} address={address} />
     </div>
